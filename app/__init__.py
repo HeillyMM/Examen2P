@@ -7,6 +7,7 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__,template_folder='templates')
+    app.secret_key = 'clave_122333'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///techbol.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     

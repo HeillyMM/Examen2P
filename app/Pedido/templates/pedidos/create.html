@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar pedido - Techbol{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        
+        <div class="card shadow-sm" style="border-radius: 12px; border: none; background-color: #ffffff;">
+            <div class="card-body p-4">
+                
+                <h3 class="card-title text-center mb-4" style="color: #4a6fa5; font-weight: 700;">
+                    Registrar Nuevo Pedido
+                </h3>
+                
+                <form action="{{url_for('bp_pedidos.create')}}" method="POST">
+                    
+                    <div class="mb-3">
+                        <label class="form-label" style="font-weight: 500; color: #555555;">
+                            Fecha
+                        </label>
+                        <input type="date" class="form-control" name="fecha" required style="border-radius: 8px;">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label" style="font-weight: 500; color: #555555;">
+                            Monto
+                        </label>
+                        <input type="number" class="form-control" name="monto" required style="border-radius: 8px;">
+                    </div>
+                    
+                    <div class="mb-4">
+                    <label for="producto_id" class="form-label" style="font-weight: 500; color: #555555;">
+                        Seleccionar Producto
+                    </label>
+                    <select name="producto_id" id="producto_id" class="form-select" required style="border-radius: 8px;">
+                        <option value="" disabled selected>Seleccione un producto</option>
+                        
+                        {% for producto in productos %}
+                            <option value="{{ producto.id }}">{{ producto.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="cliente_id" class="form-label" style="font-weight: 500; color: #555555;">
+                        Seleccionar Cliente
+                    </label>
+                    <select name="cliente_id" id="cliente_id" class="form-select" required style="border-radius: 8px;">
+                        <option value="" disabled selected>Seleccione un Cliente</option>
+                        
+                        {% for cliente in clientes %}
+                            <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{url_for('bp_pedidos.index')}}" class="btn btn-outline-secondary" style="border-radius: 8px; width: 48%;">Cancelar</a>
+                        <button type="submit" class="btn" style="background-color: #4a6fa5; color: white; border-radius: 8px; font-weight: 500; width: 48%;">
+                            Guardar pedido
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
