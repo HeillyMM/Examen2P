@@ -7,7 +7,7 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__,template_folder='templates')
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bd_equipo.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///techbol.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     db.init_app(app)
@@ -20,7 +20,7 @@ def create_app():
     
     app.register_blueprint(bp_clientes,url_prefix="/clientes")
     app.register_blueprint(bp_pedidos,url_prefix="/pedidos")
-    app.register_blueprint(bp_productos,url_prefix="/")
+    app.register_blueprint(bp_productos,url_prefix="/productos")
 
     return app
     
